@@ -196,7 +196,7 @@ You can pass additional parameters to `cmake`:
 
 Copyright (c) 2017 Avast Software, licensed under the MIT license. See the `LICENSE` file for more details.
 
-Capstone Dumper uses third-party libraries or other resources listed, along with their licenses, in the `LICENSE-THIRD-PARTY` file.
+Capstone Dumper uses third-party libraries or other resources listed, along with their licenses, in the `THIRD-PARTY-NOTICES` file.
 
 ## Contributing
 
