@@ -35,8 +35,6 @@ branches:
   only:
     # Pushes and PRs to the master branch.
     - master
-    # Testing branch - TODO: remove
-    - travis-ci
     # Version tags.
     - /^v?\d+\.\d+.*$/
 

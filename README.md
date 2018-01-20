@@ -1,5 +1,7 @@
 # Capstone Dumper
 
+[![Travis CI build status](https://travis-ci.org/avast-tl/capstone-dumper.svg?branch=master)](https://travis-ci.org/avast-tl/capstone-dumper)
+
 A utility that lets you see all the information Capstone can provide about specified instruction(s).
 
 ## Usage Example
