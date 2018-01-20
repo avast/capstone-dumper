@@ -7,8 +7,11 @@ ExternalProject_Add(capstone-project
 	CMAKE_ARGS
 		# This does not work on MSVC, but may be useful on Linux.
 		-DCMAKE_BUILD_TYPE=Release
+		-DCAPSTONE_BUILD_STATIC=ON
 		-DCAPSTONE_BUILD_SHARED=OFF
 		-DCAPSTONE_BUILD_STATIC_RUNTIME=OFF
+		-DCAPSTONE_BUILD_TESTS=OFF
+		-DCAPSTONE_X86_ATT_DISABLE=OFF
 	# Disable the update step.
 	UPDATE_COMMAND ""
 	# Disable the install step.
