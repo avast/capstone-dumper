@@ -15,11 +15,6 @@ matrix:
             - gcc-4.9
             - g++-4.9
             - cmake
-            - autoconf
-            - automake
-            - pkg-config
-            - m4
-            - libtool
       env:
         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9 && NPROC=$(nproc)"
     - os: osx
