@@ -6,6 +6,7 @@
  * @copyright (c) 2017 Avast Software, licensed under the MIT license
  */
 
+#include <algorithm>
 #include <cassert>
 #include <cstddef>
 #include <cstdlib>
@@ -16,13 +17,136 @@
 
 #include <keystone/keystone.h>
 
-#include <tl-cpputils/conversion.h>
-
 #include "capstone-dumper/capstone_dumper.h"
 
 using namespace std;
 
 namespace capstone_dumper {
+
+/**
+* @brief Removes all whitespace from the given string.
+*/
+std::string removeWhitespace(std::string s) {
+	s.erase(std::remove_if(s.begin(), s.end(),
+		[](const unsigned char c) { return std::isspace(c); }), s.end());
+	return s;
+}
+
+/**
+* @brief Converts the given string into a number.
+*
+* @param[in] str String to be converted into a number.
+* @param[out] number Into this parameter the resulting number is stored.
+* @param[in] format Number format (e.g. std::dec, std::hex).
+*
+* @return @c true if the conversion went ok, @c false otherwise.
+*
+* If the conversion fails, @a number is left unchanged.
+*/
+template<typename N>
+inline bool strToNum(const std::string &str, N &number,
+		std::ios_base &(* format)(std::ios_base &) = std::dec) {
+	std::istringstream strStream(str);
+	N convNumber = 0;
+	strStream >> format >> convNumber;
+	if (!strStream.fail() && strStream.eof()) {
+		number = convNumber;
+		return true;
+	}
+	return false;
+}
+
+/**
+ * Convert hexadecimal string @c hexIn string into bytes.
+ * There might be whitespaces in the string, e.g. "0b 84 d1 a0 80 60 40" is
+ * the same as "0b84d1a0806040".
+ */
+std::vector<uint8_t> hexStringToBytes(const std::string& hexIn)
+{
+	std::vector<uint8_t> bytes;
+
+	auto hex = removeWhitespace(hexIn);
+	for (unsigned int i = 0; i < hex.length(); i += 2)
+	{
+		std::string byteString = hex.substr(i, 2);
+		char byte = strtol(byteString.c_str(), nullptr, 16);
+		bytes.push_back(byte);
+	}
+
+	return bytes;
+}
+
+/**
+ * Converts the single byte into a hexadecimal string representation
+ * @param oStr Output stream
+ * @param byte Data to be converted
+ * @param uppercase @c true if hex letters (A-F) should be uppercase
+ */
+template<typename N> void byteToHexString(std::ostream& oStr, N byte, bool uppercase = true)
+{
+	oStr << std::hex << std::setfill('0') << std::setw(2) << (uppercase ? std::uppercase : std::nouppercase) << (byte & 0xFF);
+}
+
+/**
+ * Converts the given array of numbers into a hexadecimal string representation
+ * @param data Array to be converted into a hexadecimal string
+ * @param dataSize Size of array
+ * @param result Into this parameter the result is stored
+ * @param offset First byte from @a data which will be converted
+ * @param size Number of bytes from @a data for conversion
+ *    (0 means all bytes from @a offset)
+ * @param uppercase @c true if hex letters (A-F) should be uppercase
+ */
+template<typename N> void bytesToHexString(const N *data, std::size_t dataSize, std::string &result, std::size_t offset = 0, std::size_t size = 0, bool uppercase = true)
+{
+	if(!data)
+	{
+		dataSize = 0;
+	}
+
+	if(offset >= dataSize)
+	{
+		size = 0;
+	}
+	else
+	{
+		size = (size == 0 || offset + size > dataSize) ? dataSize - offset : size;
+	}
+
+	result.clear();
+	result.reserve(size * 2);
+	std::ostringstream oStr;
+
+	for(std::size_t i = 0; i < size; ++i)
+	{
+		byteToHexString(oStr, data[offset + i], uppercase);
+	}
+
+	result = oStr.str();
+}
+
+/**
+ * Reverse function to @c hexStringToBytes(). It is using @c bytesToHexString()
+ * to do the conversion, but inserts space afer every byte, e.g.
+ * "0b 84 d1 a0 80 60 40".
+ */
+std::string bytesToHexString(const std::vector<uint8_t>& bytes)
+{
+	std::string str;
+	bytesToHexString(bytes.data(), bytes.size(), str, 0, 0, false);
+
+	std::stringstream ss;
+	for (std::size_t i = 0; i < str.size(); ++i)
+	{
+		ss << str[i];
+		if (i % 2 == 1 && i < (str.size()-1))
+		{
+			ss << " ";
+		}
+	}
+
+	return ss.str();
+}
 
 /**
  * Convert binary @a data of @a size into printable hexadecimal string.
@@ -155,7 +279,7 @@ class ProgramOptions
 				else if (c == "-b")
 				{
 					_base = getParamOrDie(argc, argv, i);
-					if (!tl_cpputils::strToNum(_base, base, hex))
+					if (!strToNum(_base, base, hex))
 					{
 						printHelpAndDie();
 					}
@@ -163,7 +287,7 @@ class ProgramOptions
 				else if (c == "-c")
 				{
 					_code = getParamOrDie(argc, argv, i);
-					code = tl_cpputils::hexStringToBytes(_code);
+					code = hexStringToBytes(_code);
 				}
 				else if (c == "-t")
 				{
@@ -228,7 +352,7 @@ class ProgramOptions
 			cout << "Program Options:" << endl;
 			cout << "\t" << "arch     : " << arch << " (" << _arch << ")" << endl;
 			cout << "\t" << "base     : " << hex << base << " (" << _base << ")" << endl;
-			cout << "\t" << "code     : " << tl_cpputils::bytesToHexString(code) << " (" << _code << ")" << endl;
+			cout << "\t" << "code     : " << bytesToHexString(code) << " (" << _code << ")" << endl;
 			cout << "\t" << "b mode   : " << hex << basicMode << " (" << _basicMode << ")" << endl;
 			cout << "\t" << "e mode   : " << hex << extraMode << " (" << _extraMode << ")" << endl;
 			cout << "\t" << "asm text : " << text << endl;

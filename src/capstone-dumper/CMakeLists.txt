@@ -14,6 +14,6 @@ set(CAPSTONE_DUMPER_SOURCES
 )
 
 add_executable(capstone-dumper ${CAPSTONE_DUMPER_SOURCES})
-target_link_libraries(capstone-dumper tl-cpputils capstone keystone)
+target_link_libraries(capstone-dumper capstone keystone)
 target_include_directories(capstone-dumper PUBLIC ${PROJECT_SOURCE_DIR}/src/)
 install(TARGETS capstone-dumper RUNTIME DESTINATION bin)
