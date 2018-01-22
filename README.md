@@ -1,7 +1,7 @@
 # Capstone Dumper
 
 [![Travis CI build status](https://travis-ci.org/avast-tl/capstone-dumper.svg?branch=master)](https://travis-ci.org/avast-tl/capstone-dumper)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/PeterMatula/capstone-dumper?branch=master&svg=true)](https://ci.appveyor.com/project/PeterMatula/capstone-dumper)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/avast-tl/capstone-dumper?branch=master&svg=true)](https://ci.appveyor.com/project/avast-tl/capstone-dumper)
 
 A utility that lets you see all the information Capstone can provide about specified instruction(s).
 
