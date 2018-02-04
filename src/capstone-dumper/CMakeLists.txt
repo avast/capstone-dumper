@@ -1,4 +1,3 @@
-
 set(CAPSTONE_DUMPER_SOURCES
 	arm.cpp
 	arm64.cpp

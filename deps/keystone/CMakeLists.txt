@@ -1,4 +1,3 @@
-
 include(ExternalProject)
 
 # Keystone requires python3, so we first check whether python3 is installed as
