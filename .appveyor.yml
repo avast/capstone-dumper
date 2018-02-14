@@ -27,6 +27,30 @@ build_script:
   - cmd: cmake --build . --config %configuration% -- /m
   - cmd: cmake --build . --target install
 
+branches:
+  only:
+    # Pushes and PRs to the master branch.
+    - master
+    # Version tags.
+    - /^v?\d+\.\d+.*$/
+
+skip_commits:
+  files:
+    # Exact files.
+    - .travis.yml
+    - LICENSE
+    - LICENSE-THIRD-PARTY
+    - THIRD-PARTY-NOTICES
+    # All .gitignore files within repository.
+    - '**/.gitignore'
+    # All *.md files within repository.
+    - '**/*.md'
+    # All README files within repository.
+    - '**/README'
+    - '**/README.txt'
+    - '**/readme'
+    - '**/readme.txt'
+
 notifications:
   - provider: Email
     to:
