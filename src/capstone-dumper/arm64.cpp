@@ -271,23 +271,19 @@ std::string arm64_barrier_op_2_string(arm64_barrier_op bp)
 {
 	switch (bp)
 	{
-		case ARM_MB_INVALID: return "ARM_MB_INVALID";
-		case ARM_MB_RESERVED_0: return "ARM_MB_RESERVED_0";
-		case ARM_MB_OSHLD: return "ARM_MB_OSHLD";
-		case ARM_MB_OSHST: return "ARM_MB_OSHST";
-		case ARM_MB_OSH: return "ARM_MB_OSH";
-		case ARM_MB_RESERVED_4: return "ARM_MB_RESERVED_4";
-		case ARM_MB_NSHLD: return "ARM_MB_NSHLD";
-		case ARM_MB_NSHST: return "ARM_MB_NSHST";
-		case ARM_MB_NSH: return "ARM_MB_NSH";
-		case ARM_MB_RESERVED_8: return "ARM_MB_RESERVED_8";
-		case ARM_MB_ISHLD: return "ARM_MB_ISHLD";
-		case ARM_MB_ISHST: return "ARM_MB_ISHST";
-		case ARM_MB_ISH: return "ARM_MB_ISH";
-		case ARM_MB_RESERVED_12: return "ARM_MB_RESERVED_12";
-		case ARM_MB_LD: return "ARM_MB_LD";
-		case ARM_MB_ST: return "ARM_MB_ST";
-		case ARM_MB_SY: return "ARM_MB_SY";
+		case ARM64_BARRIER_INVALID: return "ARM64_BARRIER_INVALID";
+		case ARM64_BARRIER_OSHLD: return "ARM64_BARRIER_OSHLD";
+		case ARM64_BARRIER_OSHST: return "ARM64_BARRIER_OSHST";
+		case ARM64_BARRIER_OSH: return "ARM64_BARRIER_OSH";
+		case ARM64_BARRIER_NSHLD: return "ARM64_BARRIER_NSHLD";
+		case ARM64_BARRIER_NSHST: return "ARM64_BARRIER_NSHST";
+		case ARM64_BARRIER_NSH: return "ARM64_BARRIER_NSH";
+		case ARM64_BARRIER_ISHLD: return "ARM64_BARRIER_ISHLD";
+		case ARM64_BARRIER_ISHST: return "ARM64_BARRIER_ISHST";
+		case ARM64_BARRIER_ISH: return "ARM64_BARRIER_ISH";
+		case ARM64_BARRIER_LD: return "ARM64_BARRIER_LD";
+		case ARM64_BARRIER_ST: return "ARM64_BARRIER_ST";
+		case ARM64_BARRIER_SY: return "ARM64_BARRIER_SY";
 		default: return "UNKNOWN";
 	}
 }
