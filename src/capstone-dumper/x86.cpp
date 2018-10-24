@@ -187,6 +187,9 @@ void dump_cs_x86_op(csh handle, cs_x86_op& op)
 	}
 	cout << "\t\t\t" << "size   :  " << dec << unsigned(op.size) << endl;
 
+	cout << "\t\t\t" << "access :  " << cs_ac_type_2_string(op.access)
+			<< endl;
+
 	cout << "\t\t\t" << "avx bct:  " << x86_avx_bcast_2_string(op.avx_bcast)
 			<< endl;
 
