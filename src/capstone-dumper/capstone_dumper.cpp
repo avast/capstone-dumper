@@ -220,7 +220,14 @@ string reg_2_string(csh handle, unsigned reg)
 			&& reg != XCORE_REG_INVALID
 			&& reg != TMS320C64X_REG_INVALID)
 	{
-		regName = cs_reg_name(handle, reg);
+		if (auto* rn = cs_reg_name(handle, reg))
+		{
+			regName = rn;
+		}
+		else
+		{
+			regName = "UNKNOWN";
+		}
 	}
 	ret << dec << reg << " (" << regName << ")";
 
