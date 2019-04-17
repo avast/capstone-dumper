@@ -1,8 +1,9 @@
 include(ExternalProject)
 
 ExternalProject_Add(capstone-project
-	GIT_REPOSITORY https://github.com/aquynh/capstone.git
-	GIT_TAG next
+	URL https://github.com/aquynh/capstone/archive/e07c1dd116e67549dc24120dbb52f023bab47d0c.zip
+	URL_HASH SHA256=bdaaef308c2afb667a03acdd67a0608d21ca8ff905b1039a315e485f8527ee9b
+	DOWNLOAD_NAME capstone.zip
 	CMAKE_ARGS
 		# This does not work on MSVC, but may be useful on Linux.
 		-DCMAKE_BUILD_TYPE=Release

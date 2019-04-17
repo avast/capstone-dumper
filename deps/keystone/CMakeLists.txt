@@ -10,8 +10,9 @@ if(NOT PYTHON_EXECUTABLE)
 endif()
 
 ExternalProject_Add(keystone-project
-	GIT_REPOSITORY https://github.com/keystone-engine/keystone.git
-	GIT_TAG d19579217c0ac71e2d63deb389f29fb23e5a9118
+	URL https://github.com/keystone-engine/keystone/archive/d19579217c0ac71e2d63deb389f29fb23e5a9118.zip
+	URL_HASH SHA256=03ec832dafc4eb80092368605803569a3dab11b742a268d3a6bfc00480fe08f8
+	DOWNLOAD_NAME keystone.zip
 	CMAKE_ARGS
 		# This does not work on MSVC, but may be useful on Linux.
 		-DCMAKE_BUILD_TYPE=Release
