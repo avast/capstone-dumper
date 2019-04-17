@@ -1,7 +1,7 @@
 # Capstone Dumper
 
-[![Travis CI build status](https://travis-ci.org/avast-tl/capstone-dumper.svg?branch=master)](https://travis-ci.org/avast-tl/capstone-dumper)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/avast-tl/capstone-dumper?branch=master&svg=true)](https://ci.appveyor.com/project/avast-tl/capstone-dumper?branch=master)
+[![Travis CI build status](https://travis-ci.org/avast/capstone-dumper.svg?branch=master)](https://travis-ci.org/avast/capstone-dumper)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/avast/capstone-dumper?branch=master&svg=true)](https://ci.appveyor.com/project/avast/capstone-dumper?branch=master)
 
 A utility that lets you see all the information Capstone can provide about specified instruction(s).
 
@@ -173,7 +173,7 @@ Run `./capstone-dumper -h` to list all the available options.
 ## Build and Installation
 
 * Clone the repository or download the sources into a directory named `capstone-dumper`.
-  * `git clone https://github.com/avast-tl/capstone-dumper.git`
+  * `git clone https://github.com/avast/capstone-dumper.git`
 * Linux:
   * `cd capstone-dumper`
   * `mkdir build && cd build`
@@ -203,4 +203,4 @@ Capstone Dumper uses third-party libraries or other resources listed, along with
 
 ## Contributing
 
-See [RetDec contribution guidelines](https://github.com/avast-tl/retdec/wiki/Contribution-Guidelines).
+See [RetDec contribution guidelines](https://github.com/avast/retdec/wiki/Contribution-Guidelines).
